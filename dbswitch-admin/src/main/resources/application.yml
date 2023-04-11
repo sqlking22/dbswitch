@@ -1,0 +1,39 @@
+server:
+  port: 9088
+
+spring:
+  application:
+    name: dbswitch-admin
+  tomcat:
+    uri-encoding: UTF-8
+    max-http-header-size: 8096
+  mvc:
+    throw-exception-if-no-handler-found: true
+    static-path-pattern: /statics/**
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.31.57:3306/dbswitch?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF8&autoReconnect=true&useSSL=false&allowMultiQueries=true&failOverReadOnly=false&connectTimeout=30000
+    username: tangyibo
+    password: 123456
+    validation-query: SELECT 1
+    test-on-borrow: true
+  flyway:
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    table: DBSWITCH_SCHEMA_HISTORY
+    enabled: true
+
+mybatis:
+  configuration:
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
+    map-underscore-to-camel-case: true
+    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+mapper:
+  wrap-keyword: "`{0}`"
+  enable-method-annotation: true
+
+dbswitch:
+  configuration:
+    drivers-base-path: ${APP_DRIVERS_PATH}

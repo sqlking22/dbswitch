@@ -1,0 +1,39 @@
+server:
+  port: 9088
+
+spring:
+  application:
+    name: dbswitch-admin
+  tomcat:
+    uri-encoding: UTF-8
+    max-http-header-size: 8096
+  mvc:
+    throw-exception-if-no-handler-found: true
+    static-path-pattern: /statics/**
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://192.168.31.57:5432/dbswitch?currentSchema=public
+    username: tangyibo
+    password: 123456
+    validation-query: SELECT 1
+    test-on-borrow: true
+  flyway:
+    locations: classpath:db/postgres
+    baseline-on-migrate: true
+    table: dbswitch_schema_history
+    enabled: true
+
+mybatis:
+  configuration:
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
+    map-underscore-to-camel-case: true
+    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+mapper:
+  wrap-keyword: "\"{0}\""
+  enable-method-annotation: true
+
+dbswitch:
+  configuration:
+    drivers-base-path: ${APP_DRIVERS_PATH}

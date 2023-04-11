@@ -1,0 +1,28 @@
+version: '3.3'
+services:
+  mysqldb:
+    container_name: dbswitch_mysqldb
+    image: mysql:5.7
+    volumes:
+      - "/data/mysql:/var/lib/mysql"
+    environment:
+      MYSQL_DATABASE: dbswitch
+      MYSQL_USER: tangyibo
+      MYSQL_PASSWORD: 123456
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_ROOT_HOST: '%'
+  dbswitch:
+    container_name: dbswitch_webui
+    image: inrgihc/dbswitch:1.7.0
+    environment:
+      MYSQLDB_HOST: dbswitch_mysqldb
+      MYSQLDB_PORT: 3306
+      MYSQLDB_USERNAME: tangyibo
+      MYSQLDB_PASSWORD: 123456
+    volumes:
+      - /tmp:/tmp   
+    ports:
+      - 9088:9088
+    depends_on:
+      - mysqldb
+
