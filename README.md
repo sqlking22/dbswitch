@@ -1,3 +1,4 @@
+该项目来源于：https://gitee.com/inrgihc/dbswitch.git
 # 异构数据库数据与结构同步工具
 
 ## 一、工具介绍
